@@ -30,23 +30,23 @@ DoubleLinkedList::DoubleLinkedList() {
 
 void DoubleLinkedList::addNode() {
 	int nim;
-	string nim;
+	string nm;
 	cout << "\nEnter the roll number of the student:";
 	cin >> nim;
 	cout << "\nEnter the name of the student:";
-	cin >> nim;
+	cin >> nm;
 	Node* newNode = new Node();		// step 1
 	newNode->noMhs = nim;		//step2
-	newNode->name = nim;		//step2
+	newNode->name = nm;		//step2
 
-	/*Insert a node in the begining of a doubly - linked list*/
+	/*Insert a node in the beginning of a doubly - linked list*/
 	if (START == NULL || nim <= START->noMhs) {
 		if (START != NULL && nim == START->noMhs) {
 			cout << "\nDuplicate number not allowed" << endl;
 			return;
 		}
 		newNode->next = START; //step 3
-		if (START == NULL)
+		if (START != NULL)
 			START->prev = newNode; // step 4
 		newNode->prev = NULL;  // step 5
 		START = newNode; // step 6
@@ -78,8 +78,8 @@ bool DoubleLinkedList::search(int rollNo, Node** previous, Node** current) {
 	*previous = START; // step 1.a
 	*current = START;	//step 1.b
 	while (*current != NULL && rollNo != (*current)->noMhs) {	//step 1.c
-		*previous = *current;			 // 1.d
-		*current =(*current)->next;		//1.e
+		*previous = *current;			 // step 1.d
+		*current =(*current)->next;		// step 1.e
 	}
 	return (*current != NULL);
 }
@@ -108,7 +108,7 @@ void DoubleLinkedList::traverse() {
 	if (listEmpty())
 		cout << " \nList is empty" << endl;
 	else {
-		cout << "\nRecods in ascending order of roll number are:" << endl;
+		cout << "\nRecords in ascending order of roll number are:" << endl;
 		Node* currentNode = START;
 		while (currentNode != NULL) {
 			cout << currentNode->noMhs << " " << currentNode->name << endl;
@@ -132,6 +132,7 @@ void DoubleLinkedList::revtraverse() {
 		while (currentNode != NULL)
 		{
 			cout << currentNode->noMhs << " " << currentNode->name << endl;
+			currentNode = currentNode->prev;
 		}
 	}
 }
